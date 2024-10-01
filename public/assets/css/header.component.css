@@ -1,0 +1,16 @@
+.dropdown-menu.show {
+  transform: translateX(-68px) !important;
+  border-color: transparent;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hide the default checkbox */
+.container_checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}/*# sourceMappingURL=header.component.css.map */

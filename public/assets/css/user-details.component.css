@@ -1,0 +1,12 @@
+.user-img {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.user-img img {
+  max-width: 100%;
+}
+
+.user-data table tr td, .user-data table tr th {
+  padding: 0.3em 1em;
+  font-size: 15px;
+}/*# sourceMappingURL=user-details.component.css.map */
