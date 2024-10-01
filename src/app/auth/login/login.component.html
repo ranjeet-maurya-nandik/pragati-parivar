@@ -1,0 +1,122 @@
+<header id="loginHeader">
+    <div class="cloverleaf_logo">
+        <a href="javascript:void(0)" class="logo">
+          <img src="/img/pragati-parivar.png" class="img-fluid mb-3 mb-lg-0" alt="" />
+        </a>
+      </div>
+  </header>
+  
+  
+  <main class="login_form">
+    <div class="form-container-block p-0" >
+      <div  class="landing">
+        <h1>Welcome Back!</h1>
+        <p class="sub-title text-light">To keep connected with us please login with your personal info </p>
+      </div>
+      <div class="sign-in">
+        <form [formGroup]="loginForm" class="login_form-block" (ngSubmit)="login()">
+          <h1>Sign In</h1>
+  
+          <div class="input-group">
+            <input type="text" formControlName="username" placeholder="Username" />
+            <div class="error-msg"
+              *ngIf="loginForm.get('username')?.errors?.['required'] && loginForm.get('username')?.touched">
+              <span>Username is required.</span>
+            </div>
+  
+          </div>
+  
+          <div class="input-group password-input-container">
+            <input type="{{ showPassword ? 'text' : 'password' }}" formControlName="password" placeholder="Password" />
+            <i class="toggle-password-icon" (click)="togglePasswordVisibility()">
+              <i *ngIf="!showPassword" class="fas fa-eye-slash"></i>
+              <i *ngIf="showPassword" class="fas fa-eye"></i>
+            </i>
+            <div class="error-msg"
+              *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">
+              <span>Password is required.</span>
+            </div>
+            <div class="error-msg"
+              *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">
+              <span>Password should be at least 8 characters.</span>
+            </div>
+          </div>
+          <button type="submit" [disabled]="loginForm.invalid" class="sign_btn mt-2">Sign In</button>
+          <a routerLink="#"  class="forget-btn">Forgot your password?</a>
+        </form>
+  
+      </div>
+
+      <!-- <div *ngIf="!forget" class="sign-in">
+  
+        <form [formGroup]="emailForm" class="login_form-block"  *ngIf="isOtpSent">
+          <div class="form_icon"> <i class="fas fa-envelope"></i> </div>
+          <h3>Forget Password</h3>
+          <div class="input-group">
+            <input type="email" formControlName="email_id" placeholder="Email" />
+            <div class="error-msg"
+              *ngIf="emailForm.get('email_id')?.hasError('required') && emailForm.get('email_id')?.touched">
+              Email is required.
+            </div>
+            <div class="error-msg"
+              *ngIf="emailForm.get('email_id')?.hasError('email_id') && emailForm.get('email_id')?.touched">
+              Please enter a valid email address.
+            </div>
+          </div>
+          <button (click)="sendOtp()" [disabled]="emailForm.invalid || isOtpSentbtn" class="sign_btn mt-2">Send OTP</button>
+          <a routerLink="#" (click)="forgetForm()" class="forget-btn">Back to Login</a>
+        </form>
+  
+        <form [formGroup]="otpForm" class="login_form-block" *ngIf="isOtpVerified"  (ngSubmit)="verifyOtp()" >
+          <div class="form_icon"> <i class="fas fa-lock"></i> </div>
+          <h3>Verify OTP</h3>
+          <div class="input-group">
+            <input type="text" formControlName="otp" placeholder="Enter OTP" />
+            <div class="error-msg" *ngIf="otpForm.get('otp')?.hasError('required') && otpForm.get('otp')?.touched">
+              OTP is required.
+            </div>
+          </div>
+          <button type="submit"  [disabled]="otpForm.invalid || isOtpVerifiedBtn" class="sign_btn mt-2">Verify OTP</button>
+          <a routerLink="#" (click)="forgetForm()" class="forget-btn">Back to Login</a>
+        </form>
+  
+        <form [formGroup]="newPasswordForm" class="login_form-block"  *ngIf="chnagePassword">
+          
+          <div class="form_icon"><i class="fas fa-key"></i> </div>
+          <h3>Create New Password</h3>
+          <div class="input-group">
+            <input type="{{resetShowNewPassword ? 'text':'password'}}" formControlName="newPassword"
+              placeholder="New Password" />
+            <span class="toggle-password-icon " (click)="resetShowNewPasswordFun()">
+              <i *ngIf="resetShowNewPassword" class="fas fa-eye"></i>
+              <i *ngIf="!resetShowNewPassword" class="fas fa-eye-slash"></i>
+            </span>
+            <div class="error-msg"
+              *ngIf="newPasswordForm.get('newPassword')?.hasError('required') && newPasswordForm.get('newPassword')?.touched">
+              Password is required.
+            </div>
+            <div class="error-msg"
+              *ngIf="newPasswordForm.get('newPassword')?.hasError('minlength') && newPasswordForm.get('newPassword')?.touched">
+              Password must be at least 8 characters.
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="{{resetShowCPassword ? 'text':'password'}}" formControlName="confirmPassword"
+              placeholder="Confirm Password" />
+            <span class="toggle-password-icon " (click)="resetShowCPasswordFun()">
+              <i *ngIf="resetShowCPassword" class="fas fa-eye"></i>
+              <i *ngIf="!resetShowCPassword" class="fas fa-eye-slash"></i>
+            </span>
+            <div class="error-msg"
+              *ngIf="newPasswordForm?.hasError('passwordMismatch') && newPasswordForm.get('confirmPassword')?.touched">
+              Passwords do not match.
+            </div>
+          </div>
+          <button (click)="resetPassword()" [disabled]="newPasswordForm.invalid || chnagePasswordBtn" class="sign_btn mt-2">Create Password</button>
+          <a routerLink="#" (click)="forgetForm()" class="forget-btn">Back to Login</a>
+        </form>
+  
+      </div> -->
+    </div>
+  
+  </main>

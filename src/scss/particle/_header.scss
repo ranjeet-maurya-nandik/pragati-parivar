@@ -1,0 +1,40 @@
+.top-header {
+    background-color: $white;
+    margin-bottom: 10px;
+    padding: 0.4em 1em;
+    box-shadow: 0 0px 5px rgba($color: $black, $alpha: 0.02);
+    
+      ul {
+        li {
+          padding: 0 5px;
+          .user-profile{
+            width: 35px;
+            height: 35px;
+            border-radius: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            img{
+              max-width: 100%;
+              height: auto;
+            }
+          }
+          a {
+            margin-left: 5px;
+            text-decoration: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            i {
+              font-size: 22px;
+              color: $primary;
+            }
+  
+            .fa-caret-down {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    
+  }

@@ -1,0 +1,18 @@
+.user-img{
+    border-radius: 8px;
+    overflow: hidden;
+    img{
+        max-width: 100%;
+    }
+}
+
+.user-data{
+    table{
+        tr{
+            td,th{
+                padding: .3em 1em;
+                font-size: 15px;
+            }
+        }
+    }
+}

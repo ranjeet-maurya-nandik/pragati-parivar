@@ -1,0 +1,68 @@
+<main class="dashboard_wrapper_content">
+   <div class="container-fuild">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="table-header-bar">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="table-title d-flex align-items-center">
+                        <h5 class="m-0">R2B</h5>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="table-search-bar"></div>
+                  </div>
+                  <div class="col-md-3">
+                     
+                  </div>
+               </div>
+            </div>
+            @for(list of r2bLists; track list;){
+            <div class="work-oder-table-body work_order_table mb-4">
+               <h5 class="mb-2">{{list.date}}</h5>
+               <table class="table table table-hover cloverleaf_table">
+                  <thead>
+                     <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Guest Name</th>
+                        <th scope="col">Host Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Date R2B</th>
+                        <th scope="col">Gained Followed</th>
+                        <th scope="col">Purpose of Business</th>
+                        <th scope="col">Discussion Held</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+
+                     @for(rb of list.sublist; track rb; let i = $index){
+                     <tr>
+                        <td>{{i+1}}</td>
+                        <td>{{rb.guest_name}}</td>
+                        <td>{{rb.host_name}}</td>
+                        <td>{{rb.email}}</td>
+                        <td>{{rb.date_of_r2b}}</td>
+                        <td>{{rb.gained_followed}}</td>
+                        <td>{{rb.purpose_of_business}}</td>
+                        <td>{{rb.discussion_held}}</td>
+                     </tr>
+                     }@empty{
+                     <tr>
+                        <td colspan="6">Data not found!</td>
+                     </tr>
+                     }
+                  </tbody>
+               </table>
+               <!-- <span class="pagination_controls text-end mt-4 d-block">
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+               </span> -->
+            </div>
+         }@empty{
+            <p class="text-center">Data not found!</p>
+         }
+         </div>
+      </div>
+   </div>
+
+   <!-- new modal started for :: link document   -->
+</main>

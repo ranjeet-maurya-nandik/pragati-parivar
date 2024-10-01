@@ -1,0 +1,154 @@
+<main class="dashboard_wrapper_content">
+    <div class="engineer-registration form-bg">
+        <div class="container-fuild">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-12">
+                    <div class="form-container-block">
+                        <h3 class="title">
+                            {{ is_edit ? "Update User Details" : "Add User" }}
+                        </h3>
+
+                        <form [formGroup]="userAddForm" (ngSubmit)="formSubmit()" class="rest-form-block">
+                            <!-- to put -->
+
+                            <div class="login-detils">
+                                <div class="form-group form_group">
+                                    <label>Username</label>
+                                    <input class="form-control" type="text" formControlName="username"
+                                        placeholder="Enter username" />
+                                    <p class="error_msg">
+                                        @if(userAddForm.get('username').errors?.['required'] &&
+                                        userAddForm.get('username').touched){
+                                        <span class="red-error">Username is required</span>
+                                        }
+                                    </p>
+                                </div>
+                                <div class="form-group form_group">
+                                    <label>Email</label>
+                                    <input class="form-control" type="email" formControlName="email"
+                                        placeholder="Enter email" />
+                                    <p class="error_msg">
+                                        @if(userAddForm.get('email').errors?.['required'] &&
+                                        userAddForm.get('email').touched){
+                                        <span class="red-error">Email is required</span>
+                                        }@else if(userAddForm.get('email').invalid && userAddForm.get('email').touched
+                                        && userAddForm.value.email){
+                                        <span class="red-error">Email is not valid</span>
+                                        }
+                                    </p>
+                                </div>
+                                <div class="form-group form_group">
+                                    <label>Phone</label>
+                                    <input class="form-control" type="text" formControlName="phone"
+                                        placeholder="Enter phone number" />
+                                    <p class="error_msg">
+                                        @if(userAddForm.get('phone').errors?.['required'] &&
+                                        userAddForm.get('phone').touched){
+                                        <span class="red-error">Phone is required</span>
+                                        }@else if(userAddForm.get('phone').invalid &&
+                                        userAddForm.get('phone').touched){
+                                        <span class="red-error">Phone number must be 10 digits long.
+                                        </span>
+
+                                        }
+                                    </p>
+                                </div>
+                                @if(!is_edit){
+                                <div class="form-group form_group">
+                                    <label>Password</label>
+                                    <input class="form-control" type="password" formControlName="password"
+                                        placeholder="Enter passowrd" />
+                                    <p class="error_msg">
+                                        @if(userAddForm.get('password').errors?.['minlength']
+                                        && userAddForm.get('password').touched){
+                                        <span class="red-error">Password must be at least 8 characters long</span>
+                                        }
+                                    </p>
+                                </div>
+
+                                }
+                                <div class="form-group form_group">
+                                    <label>Company name</label>
+                                    <input class="form-control" type="text" formControlName="company_name"
+                                        placeholder="Enter company" />
+                                    <p class="error_msg">
+                                        @if(userAddForm.get('company_name').errors?.['required'] &&
+                                        userAddForm.get('company_name').touched){
+                                        <span class="red-error">Company is required</span>
+                                        }
+                                    </p>
+                                </div>
+
+                                <div class="form-group form_group">
+                                    <label>Address</label>
+                                    <input class="form-control" type="text" formControlName="address"
+                                        placeholder="Enter address" />
+                                    <p class="error_msg">
+                                        @if(userAddForm.get('address').errors?.['required'] &&
+                                        userAddForm.get('address').touched){
+                                        <span class="red-error">Address is required</span>
+                                        }
+                                    </p>
+                                </div>
+
+                                <div class="form-group form_group">
+                                    <label>City/Town</label>
+                                    <input class="form-control" type="text" formControlName="city"
+                                        placeholder="Enter city" />
+                                    <p class="error_msg">
+                                        @if(userAddForm.get('city').errors?.['required'] &&
+                                        userAddForm.get('city').touched){
+                                        <span class="red-error">City/Town is required</span>
+                                        }
+                                    </p>
+                                </div>
+
+                                <div class="form-group form_group">
+                                    <label>State</label>
+                                    <input class="form-control" type="text" formControlName="state"
+                                        placeholder="Enter state" />
+                                    <p class="error_msg">
+                                        <span
+                                            *ngIf="userAddForm.get('state').errors?.['required'] && userAddForm.get('state').touched"
+                                            class="red-error">
+                                            State is required
+                                        </span>
+                                    </p>
+                                </div>
+
+                                <div class="form-group form_group">
+                                    <label>Zip/Postal code</label>
+                                    <input class="form-control" type="text" formControlName="postal_code"
+                                        placeholder="Enter zip" />
+                                    <p class="error_msg">
+                                        @if(userAddForm.get('postal_code').errors?.['required'] &&
+                                        userAddForm.get('postal_code').touched){
+                                        <span class="red-error">Zip is required</span>
+                                        }
+                                    </p>
+                                </div>
+
+                                <div class="form-group form_group">
+                                    <label>Country</label>
+                                    <input class="form-control" type="text" formControlName="country"
+                                        placeholder="Enter country" />
+                                    <p class="error_msg">
+                                        @if(userAddForm.get('country').errors?.['required'] &&
+                                        userAddForm.get('country').touched){
+                                        <span class="red-error">Country is required</span>
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn-block btn btn-default signup"
+                                    [disabled]="userAddForm.invalid"> {{ is_edit ? "Update" : "Add User" }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,68 @@
+<main class="dashboard_wrapper_content">
+   <div class="container-fuild">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="table-header-bar">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="table-title d-flex align-items-center">
+                        <h5 class="m-0">Business Reporting</h5>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="table-search-bar"></div>
+                  </div>
+                  <!-- <div class="col-md-3">
+                     <div class="">
+                        <a routerLink="/add-user" class="btn-block btn btn-secondary custom-btn primary_bg"><i
+                              class="bx bxs-plus-circle fs-3 text px-2"></i>Add User</a>
+                     </div>
+                  </div> -->
+               </div>
+            </div>
+            @for(list of businessReportLists; track list;){
+            <div class="work-oder-table-body work_order_table mb-4">
+               <h5 class="mb-2">{{list.date}}</h5>
+               <table class="table table table-hover cloverleaf_table">
+                  <thead>
+                     <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Giver Name</th>
+                        <th scope="col">Receiver Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Transaction Name</th>
+                        <th scope="col">Date of Business Exchange</th>
+                        <th scope="col">Product Services</th>
+                        <th scope="col">Amount</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+
+                     @for(busi of list.reports; track busi; let i = $index){
+                     <tr>
+                        <td>{{i+1}}</td>
+                        <td>{{busi.giver_name}}</td>
+                        <td>{{busi.receiver_name}}</td>
+                        <td>{{busi.email}}</td>
+                        <td>{{busi.type_of_transaction_name}}</td>
+                        <td>{{busi.date_of_business_exchange}}</td>
+                        <td>{{busi.product_services}}</td>
+                        <td>{{busi.amount}}</td>
+                     </tr>
+                     }@empty{
+                     <tr>
+                        <td colspan="6">Data not found!</td>
+                     </tr>
+                     }
+                  </tbody>
+               </table>
+            </div>
+            }@empty{
+               <p class="text-center">Data not found!</p>
+            }
+         </div>
+      </div>
+   </div>
+
+   <!-- new modal started for :: link document   -->
+</main>

@@ -1,0 +1,70 @@
+<main class="dashboard_wrapper_content">
+   <div class="container-fuild">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="table-header-bar">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="table-title d-flex align-items-center">
+                        <h5 class="m-0">Give & Ask</h5>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="table-search-bar"></div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="">
+                        <!-- <a
+                            routerLink="/add-user"
+                            class="btn-block btn btn-secondary custom-btn primary_bg"
+                            ><i class="bx bxs-plus-circle fs-3 text px-2"></i>Add User</a
+                            > -->
+                     </div>
+                  </div>
+               </div>
+            </div>
+            @for(list of giveAskLists; track list;){
+            <div class="work-oder-table-body work_order_table mb-4">
+               <h5 class="mb-2">{{list.date}}</h5>
+               <table class="table table table-hover cloverleaf_table">
+                  <thead>
+                     <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Created at</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">your Ask</th>
+                        <th scope="col">Your Give</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+
+                     @for(giveAsk of list.sublist; track giveAsk; let i = $index){
+                     <tr>
+                        <td>{{i+1}}</td>
+                        <td>{{giveAsk.name}}</td>
+                        <td>{{giveAsk.email}}</td>
+                        <td>{{giveAsk.created_at}}</td>
+                        <td>{{giveAsk.your_company}}</td>
+                        <td>{{giveAsk.your_ask}}</td>
+                        <td>{{giveAsk.your_give}}</td>
+                     </tr>
+                     }@empty{
+                     <tr>
+                        <td colspan="6">User not found!</td>
+                     </tr>
+                     }
+                  </tbody>
+               </table>
+   
+            </div>
+            }@empty{
+               <p class="text-center">Data not found!</p>
+            }
+         </div>
+      </div>
+   </div>
+
+   <!-- new modal started for :: link document   -->
+</main>
