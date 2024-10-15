@@ -1,0 +1,91 @@
+<main class="dashboard_wrapper_content rounded">
+    <div class="container-fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-header-bar pt-4 px-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="table-title d-flex align-items-center">
+                                <h4 class="m-0 ">Welcome to Dashboard</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-stretch mt-5">
+                        <div class="c-dashboardInfo col-lg-3 col-md-6">
+                            <div class="wrap">
+                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                    Total Wings </h4><span
+                                    class="hind-font caption-12 c-dashboardInfo__count">{{dashboard_data.wings_count}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="c-dashboardInfo col-lg-3 col-md-6">
+                            <div class="wrap">
+                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Total
+                                    Users
+                                </h4><span
+                                    class="hind-font caption-12 c-dashboardInfo__count">{{dashboard_data.users_count}}</span>
+                            </div>
+                        </div>
+                        <div class="c-dashboardInfo col-lg-3 col-md-6">
+                            <div class="wrap">
+                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Total
+                                    R2B </h4><span
+                                    class="hind-font caption-12 c-dashboardInfo__count">{{dashboard_data.r2b_count}}</span>
+                            </div>
+                        </div>
+                        <div class="c-dashboardInfo col-lg-3 col-md-6">
+                            <div class="wrap">
+                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                    Total Refernce Exchange
+                                </h4><span
+                                    class="hind-font caption-12 c-dashboardInfo__count">{{dashboard_data.refernce_exchange_count}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-lg-7">
+                            <h5 class="m-0 "><strong>Upcoming Meetings</strong></h5>
+                            <div class="work-oder-table-body work_order_table">
+                                <table class="table table table-hover cloverleaf_table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width: 60px;">S.No</th>
+                                            <th scope="col">Wing Name</th>
+                                            <th scope="col">Time</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @for(user of dashboard_data .upcoming_meetings| paginate : { itemsPerPage: 10,
+                                        currentPage: p }; track user; let i = $index){
+                                        <tr>
+                                            <td>{{i+1}}</td>
+                                            <td>{{user.wing_name}}</td>
+                                            <td>{{user.meeting_time}}</td>
+                                            <td>{{user.meeting_date}}</td>
+                                        </tr>
+                                        }@empty{
+                                        <tr>
+                                            <td colspan="6">Date not found!</td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                <span class="pagination_controls text-end mt-4 d-block">
+                                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

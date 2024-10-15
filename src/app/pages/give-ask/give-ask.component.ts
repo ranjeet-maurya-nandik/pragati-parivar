@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../../services/api/rest-api.service';
 import { NotifyService } from '../../services/noty/notify.service';
+import { RouterLink } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 interface giveAsk {
   date: string,
   sublist: [{
     id: number,
-    created_at: string,
     email: string,
     name: string,
-    your_company: string,
+    company: string,
     your_give: string,
     your_ask: string
   }]
@@ -18,18 +19,33 @@ interface giveAsk {
 @Component({
   selector: 'app-give-ask',
   standalone: true,
-  imports: [],
+  imports: [RouterLink,NgxPaginationModule],
   templateUrl: './give-ask.component.html',
   styleUrl: './give-ask.component.scss'
 })
 export class GiveAskComponent implements OnInit{
+  p:number = 0;
   constructor(private restApi: RestApiService, private noty: NotifyService) { }
   ngOnInit(): void {
-    this.giveAskList();
+    this.giveAskList('');
   }
   giveAskLists: giveAsk[] = [];
-  giveAskList() {
-    this.restApi.giveAskApi().subscribe((res: any) => {
+  today:any;
+  giveAskList(date:any) {
+    const selectedDate = new Date(date.value);
+    const currentDate = new Date();   
+    
+    this.today = currentDate.toISOString().split('T');
+    if (selectedDate > currentDate) {
+      this.noty.error('Future dates are not allowed.');
+      return;
+    }
+
+    const data = {
+      date:date.value ?? ''
+    }
+    
+    this.restApi.giveAskApi(data).subscribe((res: any) => {
       if (res.status) {
         this.giveAskLists = res.data;
       } else {

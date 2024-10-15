@@ -32,7 +32,7 @@ export class LoginComponent {
     this.loggedIn();
 
     this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
       password: new FormControl('',[Validators.required,Validators.minLength(5),]),
     });
 
@@ -44,19 +44,20 @@ export class LoginComponent {
       this.router.navigate(['/']);
     }
   }
+  
   apiResponse: boolean = false;
 
   public login() {
     if (this.loginForm.valid) {
       const formData = {
-        username: this.loginForm.get('username')?.value,
+        email: this.loginForm.get('email')?.value,
         password: this.loginForm.get('password')?.value,
       }
       this.apiResponse = true;
       this.restApi.login(formData).subscribe((response: any) => {
         if (response.status) {
             this.storage.set('token',response.token);
-            this.storage.set('user_details',JSON.stringify(response.user));
+            this.storage.set('user_details',JSON.stringify(response.data));
             this.router.navigate(['/']);
             this.noty.success(response.message);
             this.apiResponse = false;

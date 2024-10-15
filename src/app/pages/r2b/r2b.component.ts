@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../../services/api/rest-api.service';
 import { NotifyService } from '../../services/noty/notify.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 interface R2B {
   date: string,
@@ -20,7 +22,7 @@ interface R2B {
 @Component({
   selector: 'app-r2b',
   standalone: true,
-  imports: [NgxPaginationModule],
+  imports: [NgxPaginationModule,RouterLink,FormsModule],
   templateUrl: './r2b.component.html',
   styleUrl: './r2b.component.scss'
 })
@@ -28,11 +30,25 @@ export class R2bComponent implements OnInit {
   constructor(private restApi: RestApiService, private noty: NotifyService) { }
   p: number = 1;
   ngOnInit(): void {
-    this.r2bList();
+    this.r2bList('');
   }
   r2bLists:R2B[] = [];
-  r2bList() {
-    this.restApi.r2bApi().subscribe((res: any) => {
+  today:any = '';
+  r2bList(date:any) {
+    const selectedDate = new Date(date.value);
+    const currentDate = new Date();   
+    this.today = currentDate.toISOString().split('T');
+
+    if (selectedDate > currentDate) {
+      this.noty.error('Future dates are not allowed.');
+      return;
+    }
+
+    const data = {
+      date:date.value ?? ''
+    }
+    
+    this.restApi.r2bApi(data).subscribe((res: any) => {
       if (res.status) {
         this.r2bLists = res.data;
       } else {

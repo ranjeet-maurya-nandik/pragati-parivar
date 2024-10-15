@@ -40,7 +40,7 @@
                      @for(user of userLists | paginate : { itemsPerPage: 10, currentPage: p }; track user; let i = $index){
                         <tr>
                            <td>{{i+1}}</td>
-                           <td>{{user.username}}</td>
+                           <td>{{user.name}}</td>
                            <td>{{user.email}}</td>
                            <td>{{user.phone}}</td>
                            <td>{{user.company_name}}</td>

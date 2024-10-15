@@ -54,7 +54,7 @@ constructor(private http: HttpClient, private storage: StorageService) {}
         delay(100),
         map((data: any) => (data || data)),
         catchError(this.handleError)
-      );
+    );
   }
 
   private reqHeaders() {
@@ -77,50 +77,104 @@ constructor(private http: HttpClient, private storage: StorageService) {}
 
   }
   
+
+
   public login(data:{}): any {
-    return this.post(this.getApiUrl('login/'), data);
+    return this.post(this.getApiUrl('login'), data);
   }
   public userProfileApi(): any {
     return this.get(this.getApiUrl('profile/'));
   }
 
+  // dashboard //
+
+  public dashboardApi(){
+    return this.get(this.getApiUrl('web/home/dashboard'))
+  }
+
   // user management //
 
-  public createUserApi(data:any){
-    return this.post(this.getApiUrl('register/'),data)
+  
+  public userListAPi(){
+    return this.get(this.getApiUrl('user/list'))
+  }
+  public userDetailsApi(id:number){
+    return this.get(this.getApiUrl(`user/details/${id}`))
   }
 
   public deleteUserApi(id:number){
-    return this.post(this.getApiUrl(`user-profiles/delete/${id}/`), {})
+    return this.get(this.getApiUrl(`user/delete/${id}`))
   }
-  public userDetailsApi(id:number){
-    return this.get(this.getApiUrl(`user-profiles/details/${id}/`))
-  }
-
-  public userUpdateApi(id:number,data:{}){
-    return this.post(this.getApiUrl(`user-profiles/update/${id}/`),data)
-  }
-
-  public userListAPi(){
-    return this.get(this.getApiUrl('profile/list/'))
+  
+  public createUserApi(data:any){
+    return this.post(this.getApiUrl('user/register'),data)
   }
 
 
-  public r2bApi(){
-    return this.get(this.getApiUrl('r2bform/list/?type=1'))
+  // wing mangement //
+  wingListApi(){
+      return this.get(this.getApiUrl('web/wing/list'))
+  }
+  public createWingApi(data:any){
+    return this.post(this.getApiUrl('web/wing/create'),data)
+  }
+  
+  public wingDetailsApi(id:number){
+    return this.get(this.getApiUrl(`web/wing/details/${id}`))
   }
 
-  public referenceExchangedApi(){
-    return this.get(this.getApiUrl('Reference/list/?type=1'))
+  public deleteWingApi(id:number){
+    return this.get(this.getApiUrl(`web/wing/delete/${id}`))
   }
 
-  public businessReportingApi(){
-    return this.get(this.getApiUrl('BusinessReport/list/?type=1'))
+
+  // wing mangement //
+  meetingListApi(){
+    return this.get(this.getApiUrl('web/meeting/list'))
+}
+
+public createMeetingApi(data:any){
+  return this.post(this.getApiUrl('web/meeting/create'),data)
+}
+
+public meetingDetailsApi(id:number){
+  return this.get(this.getApiUrl(`web/meeting/details/${id}`))
+}
+
+public deleteMeetingApi(id:number){
+  return this.get(this.getApiUrl(`web/meeting/delete/${id}`))
+}
+
+
+  // r2b //
+
+
+  public r2bApi(data:any){
+    return this.get(this.getApiUrl(`web/r2b/list?date=${data.date}`))
   }
 
-  public giveAskApi(){
-    return this.get(this.getApiUrl('give-ask/list/?type=1'))
+  public r2bDetailsApi(id:number){
+    return this.get(this.getApiUrl(`web/r2b/details/${id}`))
   }
 
+  public referenceExchangedApi(data:any){
+    return this.get(this.getApiUrl(`web/refernce/list?date=${data.date}`))
+  }
+  public referenceDetailsApi(id:number){
+    return this.get(this.getApiUrl(`web/refernce/details/${id}`))
+  }
+  public businessReportingApi(data:any){
+    return this.get(this.getApiUrl(`web/b_report/list?date=${data.date}`))
+  }
+  public bReportingDetailsApi(id:number){
+    return this.get(this.getApiUrl(`web/b_report/details/${id}`))
+  }
+
+  public giveAskApi(data:any){
+    return this.get(this.getApiUrl(`web/give_ask/list?date=${data.date}`))
+  }
+  public giveAskDetailsApi(id:number){
+    return this.get(this.getApiUrl(`web/give_ask/details/${id}`))
+  }
 
 }

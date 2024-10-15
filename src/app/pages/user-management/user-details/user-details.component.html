@@ -6,27 +6,36 @@
                     <div class="row">
                         <div class="col-md-4 offset-1">
                             <div class="user-img">
-                                <img src="./img/avtar.jpg" alt="">
+                                <img src="{{profile_data?.profle_pic}}" onerror="this.src='./img/avtar.jpg'" alt="">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="user-data">
                                 <table>
                                     <tr>
-                                        <th>Username</th>
-                                        <td>{{profile_data?.username}}</td>
+                                        <th>Wing</th>
+                                        <td>{{profile_data?.wing_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>{{profile_data?.name}}</td>
                                     </tr>
                                     <tr>
                                         <th>Email</th>
                                         <td>{{profile_data?.email}}</td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <th>Phone</th>
+                                        <td>{{profile_data?.phone}}</td>
                                     </tr>
                                     <tr>
                                         <th>Company name</th>
                                         <td>{{profile_data?.company_name}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Phone</th>
-                                        <td>{{profile_data?.phone}}</td>
+                                        <th>Company website</th>
+                                        <td>{{profile_data?.company_website}}</td>
                                     </tr>
                                     <tr>
                                         <th>Address</th>
@@ -51,9 +60,50 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-md-12 pt-5">
-                            <div class="gain-cd offset-1">
+                        <div class="col-md-11 pt-5 offset-1">
+                            <div class="gain-cd ">
                                 <h5><strong>GAINS CD</strong></h5>
+                            </div>
+                            <div class="user-data">
+                                <table class="table">
+                                    <tr>
+                                        <th>Unique Selling Point</th>
+                                        <td>{{profile_data?.usb}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Goals</th>
+                                        <td>{{profile_data?.goals}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Category</th>
+                                        <td>{{profile_data?.category}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Years in Business</th>
+                                        <td>{{profile_data?.years_in_business}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Accomplishment</th>
+                                        <td>{{profile_data?.accomplishment}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Interests</th>
+                                        <td>{{profile_data?.interests}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Networks</th>
+                                        <td>{{profile_data?.networks}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Skills</th>
+                                        <td>{{profile_data?.skills}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>challenges</th>
+                                        <td>{{profile_data?.challenges}}</td>
+                                    </tr>
+                                    
+                                </table>
                             </div>
                         </div>
                     </div>

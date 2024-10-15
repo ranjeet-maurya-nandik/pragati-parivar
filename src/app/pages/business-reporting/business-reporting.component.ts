@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../../services/api/rest-api.service';
 import { NotifyService } from '../../services/noty/notify.service';
+import { RouterLink } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 interface BusinessReport {
   date: string,
@@ -21,18 +23,35 @@ interface BusinessReport {
 @Component({
   selector: 'app-business-reporting',
   standalone: true,
-  imports: [],
+  imports: [RouterLink,NgxPaginationModule],
   templateUrl: './business-reporting.component.html',
   styleUrl: './business-reporting.component.scss'
 })
 export class BusinessReportingComponent implements OnInit {
+  p:number = 0;
   constructor(private restApi: RestApiService, private noty: NotifyService) { }
   ngOnInit(): void {
-    this.BusinessReportList();
+    this.BusinessReportList('');
   }
   businessReportLists: BusinessReport[] = [];
-  BusinessReportList() {
-    this.restApi.businessReportingApi().subscribe((res: any) => {
+  today:any;
+  BusinessReportList(date:any) {
+
+    const selectedDate = new Date(date.value);
+    const currentDate = new Date();
+  
+    this.today = currentDate.toISOString().split('T');
+
+    if (selectedDate > currentDate) {
+      this.noty.error('Future dates are not allowed.');
+      return;
+    }
+
+    const data = {
+      date: date.value ?? ''
+    }
+
+    this.restApi.businessReportingApi(data).subscribe((res: any) => {
       if (res.status) {
         this.businessReportLists = res.data;
       } else {

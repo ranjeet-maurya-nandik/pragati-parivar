@@ -1,7 +1,7 @@
 <header id="loginHeader">
     <div class="cloverleaf_logo">
         <a href="javascript:void(0)" class="logo">
-          <img src="/img/pragati-parivar.png" class="img-fluid mb-3 mb-lg-0" alt="" />
+          <img src="./img/pragati-parivar.png" class="img-fluid mb-3 mb-lg-0" alt="" />
         </a>
       </div>
   </header>
@@ -18,10 +18,10 @@
           <h1>Sign In</h1>
   
           <div class="input-group">
-            <input type="text" formControlName="username" placeholder="Username" />
+            <input type="email" formControlName="email" placeholder="Email" />
             <div class="error-msg"
-              *ngIf="loginForm.get('username')?.errors?.['required'] && loginForm.get('username')?.touched">
-              <span>Username is required.</span>
+              *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
+              <span>Email is required.</span>
             </div>
   
           </div>

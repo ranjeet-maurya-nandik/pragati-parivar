@@ -2,15 +2,19 @@
 <nav class="navBar top-navbar">
   <div class="cloverleaf_logo">
     <a href="javascript:void(0)" class="logo">
-      <img src="/img/pragati-parivar.png" class="img-fluid mb-3 mb-lg-0" alt="" />
+      <img src="./img/pragati-parivar.png" class="img-fluid mb-3 mb-lg-0" alt="" />
     </a>
   </div>
 
   <ul class="unoder-list">
-    <li><a  routerLink="/user-management" routerLinkActive="active" [ngClass]="{active:routes == '/add-user' || routes == '/user-details'}" href="javascript:void(0)" > <i class="fa fa-user"></i> <span>User Management</span></a></li>
+    <li><a  routerLink="/dashboard" routerLinkActive="active" href="javascript:void(0)"> <i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+    <li><a  routerLink="/wing-management" routerLinkActive="active" [ngClass]="{active:routes == '/add-wing' || routes == '/wing-management'}"  href="javascript:void(0)" > <i class="fa fa-dashboard"></i> <span>Wing Management</span></a></li>
+    <li><a  routerLink="/user-management" routerLinkActive="active" [ngClass]="{active:routes == '/add-user' || routes == '/user-details' || routes == '/user-management'}" href="javascript:void(0)" > <i class="fa fa-user"></i> <span>User Management</span></a></li>
+    <li><a  routerLink="/meeting-management" routerLinkActive="active" [ngClass]="{active:routes == '/add-meeting' || routes == '/meeting-management'}"  href="javascript:void(0)" > <i class="fa fa-dashboard"></i> <span>Meeting Management</span></a></li>
     <li><a routerLink="/reference-excahanged" routerLinkActive="active" href="javascript:void(0)" > <i class="fa-solid fa-right-left"></i> <span>Reference Excahanged</span></a></li>
     <li><a routerLink="/give-ask" routerLinkActive="active" href="javascript:void(0)" > <i class="fa-solid fa-comment"></i> <span>Give & Ask</span></a></li>
     <li><a routerLink="/business-reporting" routerLinkActive="active" href="javascript:void(0)" > <i class="fa-solid fa-business-time"></i> <span>Business Reporting</span></a></li>
     <li><a routerLink="/r2b" routerLinkActive="active" href="javascript:void(0)" > <i class="fa fa-user"></i> <span>R2B</span></a></li>
+    <li><a routerLink="/reports" routerLinkActive="active" href="javascript:void(0)" > <i class="fa fa-user"></i> <span>Reports</span></a></li>
   </ul>
 </nav>

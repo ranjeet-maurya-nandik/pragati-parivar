@@ -37,19 +37,35 @@ export class AddUserComponent {
 
 
   ngOnInit(): void {
+    this.wingList();
+
     this.userAddForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
+      wing: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.minLength(5), Validators.email]),
       phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
-      city: new FormControl('', [Validators.required]),
-      address: new FormControl('', [Validators.required]),
-      state: new FormControl('', [Validators.required]),
-      postal_code: new FormControl('', [Validators.required]),
-      country: new FormControl('', [Validators.required]),
-      company_name: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.minLength(8)]),
+      user_photo: new FormControl('', []),
+
+      company_name: new FormControl('', [Validators.required]),
+      company_logo: new FormControl('', []),
+      company_website: new FormControl('', []),
+      category: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      officeMap: new FormControl('', [this.urlValidator]),
+      city: new FormControl('', [Validators.required]),
+      state: new FormControl('', [Validators.required]),
+      postal_code: new FormControl('', [Validators.required,Validators.pattern('^[0-9]*$')]),
+      country: new FormControl('', [Validators.required]),
     });
 
+  } 
+ urlValidator(control: any) {
+    const urlPattern = /^(https?:\/\/)?(www\.)?(google\.(com|co\.[a-z]{2,3})\/maps|openstreetmap\.org\/)(.+)$/;
+    if (!control.value.match(urlPattern)) {
+      return { invalidUrl: true };
+    }
+    return null;
   }
 
   apiResponse: boolean = false;
@@ -57,27 +73,34 @@ export class AddUserComponent {
   submitUserForm() {
     this.apiResponse = true;
     const password = this.userAddForm.get('password').value ?? '';
-    if (!password) {
+    if (!password && !this.is_edit) {
       this.noty.error('Password is required');
       return;
     }
     const formData = new FormData();
-    formData.append('username', this.userAddForm.get('username').value);
+    formData.append('wing_id', this.userAddForm.get('wing').value);
+    formData.append('name', this.userAddForm.get('name').value);
     formData.append('email', this.userAddForm.get('email').value);
     formData.append('phone', this.userAddForm.get('phone').value ?? '');
-    formData.append('city', this.userAddForm.get('city').value ?? '');
+    formData.append('password', password);
+    formData.append('profile_pic', this.userPicFile ?? '');
+
+    formData.append('company_name', this.userAddForm.get('company_name').value ?? '');
+    formData.append('company_website', this.userAddForm.get('company_website').value ?? '');
+    formData.append('category', this.userAddForm.get('category').value ?? '');
+    formData.append('company_logo', this.websiteLogoFile ?? '');
     formData.append('address', this.userAddForm.get('address').value ?? '');
+    formData.append('map_url', this.userAddForm.get('officeMap').value ?? '');
+    formData.append('city', this.userAddForm.get('city').value ?? '');
     formData.append('state', this.userAddForm.get('state').value ?? '');
     formData.append('postal_code', this.userAddForm.get('postal_code').value ?? '');
     formData.append('country', this.userAddForm.get('country').value ?? '');
-    formData.append('company_name', this.userAddForm.get('company_name').value ?? '');
-    formData.append('password', password);
-    formData.append('role', '6');
+    formData.append('id', this.user_id_for_edit ? this.user_id_for_edit.toString() : '' );
 
-
+ 
     this.restApi.createUserApi(formData).subscribe((data: any) => {
       if (data.status) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/user-management']);
         this.noty.success(data.message);
       } else {
         this.noty.error(data.message);
@@ -85,14 +108,30 @@ export class AddUserComponent {
     });
   }
 
+  websiteLogoFile: any ;
 
+  websiteLogo(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.websiteLogoFile = input.files[0];
+    }
+  }
+
+  userPicFile: any;
+
+  userPic(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.userPicFile = input.files[0];
+    }
+  }
 
   prefillUserDetail() {
     this.restApi.userDetailsApi(this.user_id_for_edit).subscribe((response: any) => {
       if (response.status) {
-        var _data = response.user_details;
+        var _data = response.data;
         this.userAddForm.patchValue({
-          username: _data.username,
+          name: _data.name,
           email: _data.email,
           phone: _data.phone,
           city: _data.city,
@@ -102,40 +141,28 @@ export class AddUserComponent {
           country: _data.country,
           company_name: _data.company_name,
           password: _data.password,
+          wing:_data.wing_id,
+          // user_photo:_data.profile_pic,
+          // company_logo:_data.company_logo,
+          company_website:_data.company_website,
+          category:_data.category	,
+          officeMap:_data.map_url,
         })
       }
     });
   }
 
-
-  updateUser(){
-    const data = {
-      username: this.userAddForm.get('username').value,
-      email: this.userAddForm.get('email').value,
-      phone: this.userAddForm.get('phone').value,
-      city: this.userAddForm.get('city').value,
-      address: this.userAddForm.get('address').value,
-      state: this.userAddForm.get('state').value,
-      postal_code: this.userAddForm.get('postal_code').value,
-      country: this.userAddForm.get('country').value,
-      company_name: this.userAddForm.get('company_name').value,
-      password: this.userAddForm.get('password').value
-    }
-    this.restApi.userUpdateApi(this.user_id_for_edit,data).subscribe((res:any)=>{
+wingLists:any;
+  wingList(){
+    this.restApi.wingListApi().subscribe((res:any)=>{
       if(res.status){
-        this.router.navigate(['/']);
-        this.noty.success(res.message);
+          this.wingLists = res.data; 
       }else{
         this.noty.error(res.message);
       }
     })
   }
 
-  formSubmit(){
-    if(this.is_edit){
-      this.updateUser();
-    }else{
-      this.submitUserForm();
-    }
-  }
+
+
 }

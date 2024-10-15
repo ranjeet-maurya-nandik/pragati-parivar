@@ -1,6 +1,6 @@
 export const environment = {
     api: {
-        url: 'http://192.168.1.103:8001/API/', // production url
+        url: 'https://getmeacard.com/demo/pragati_parivar/public/api/v1/', // production url
     }
 
 };

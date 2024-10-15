@@ -14,12 +14,9 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span class="user-profile"><img src="./img/avtar.jpg" [alt]="userDetails.username"> </span> {{userDetails.username}}</a>
+              <span class="user-profile"><img src="./img/avtar.jpg" [alt]="userDetails.name"> </span> {{userDetails.name}}</a>
             <ul class="dropdown-menu">
-              <!-- <li><a class="dropdown-item" href="#"> Profile</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li> -->
+           
               <li><a (click)="logOut()" class="dropdown-item" href="javascript:void()">Logout</a></li>
             </ul>
           </li>

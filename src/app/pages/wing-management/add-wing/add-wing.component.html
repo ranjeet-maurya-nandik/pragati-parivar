@@ -1,0 +1,36 @@
+<main class="dashboard_wrapper_content">
+    <div class="engineer-registration form-bg">
+        <div class="container-fuild">
+            <div class="row">
+                <div class="offset-md-2 col-md-8">
+                    <div class="form-container-block">
+                        <h3 class="title">
+                            {{ is_edit ? "Update Wing" : "Add Wing" }}
+                        </h3>
+
+                        <form [formGroup]="wingAddForm" (ngSubmit)="submitWingForm()" class="rest-form-block">
+                            <div class="login-detils">
+                                <div class="form-group form_group w-100">
+                                    <label>Wing *</label>
+                                    <input class="form-control" type="text" formControlName="wing"
+                                        placeholder="Enter wing" />
+                                    <p class="error_msg">
+                                        @if(wingAddForm.get('wing').errors?.['required'] &&
+                                        wingAddForm.get('wing').touched){
+                                        <span class="red-error">Wing is required</span>
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn-block btn btn-default signup"
+                                    [disabled]="wingAddForm.invalid"> {{ is_edit ? "Update" : "Add wing" }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

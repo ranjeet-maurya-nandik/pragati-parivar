@@ -6,7 +6,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import Swal from 'sweetalert2';
 interface userList {
   id: number,
-  username: string,
+  name: string,
   email: string,
   phone: number,
   role: number,
@@ -35,7 +35,7 @@ export class UserListComponent implements OnInit {
   userList() {
     this.restApi.userListAPi().subscribe((res: any) => {
       if (res.status) {
-        this.userLists = res.user_profiles;
+        this.userLists = res.data;
       } else {
         this.noty.error(res.message);
       }

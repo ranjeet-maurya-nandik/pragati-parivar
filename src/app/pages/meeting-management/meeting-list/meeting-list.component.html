@@ -1,0 +1,67 @@
+<main class="dashboard_wrapper_content">
+    <div class="container-fuild">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="table-header-bar">
+                <div class="row">
+                   <div class="col-md-6">
+                      <div class="table-title d-flex align-items-center">
+                         <h5 class="m-0">Meeting Management</h5>
+                      </div>
+                   </div>
+                   <div class="col-md-3">
+                      <div class="table-search-bar"></div>
+                   </div>
+                   <div class="col-md-3">
+                      <div class="">
+                         <a
+                            routerLink="/add-meeting"
+                            class="btn-block btn btn-secondary custom-btn primary_bg"
+                            ><i class="bx bxs-plus-circle fs-3 text px-2"></i>Add Meeting</a
+                            >
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="work-oder-table-body work_order_table">
+                <table class="table table table-hover cloverleaf_table">
+                   <thead>
+                      <tr>
+                         <th scope="col">S.No</th>
+                         <th scope="col">Wing Name</th>
+                         <th scope="col">Meeting Date</th>
+                         <th scope="col">Meeting Time</th>
+                         <th scope="col">Action</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+
+                     @for(meet of meetingLists | paginate : { itemsPerPage: 10, currentPage: p }; track meet; let i = $index){
+                        <tr>
+                           <td>{{i+1}}</td>
+                           <td>{{meet.wing_name}}</td>
+                           <td>{{meet.meeting_date}}</td>
+                           <td>{{meet.meeting_time}}</td>
+                           <td>
+                              <button routerLink="/add-meeting"  [queryParams]="{ id: meet.id }" class="btn btn-default"><i class="fa-solid fa-pen-to-square text-primary pointer"></i></button>
+                              <button (click)="deleteMeeting(meet.id)" class="btn btn-default"> <i class="fa-solid fa-trash text-danger"></i></button>
+                              <!-- <button routerLink="/user-details"  [queryParams]="{ id: user.id }" class="btn btn-default"><i class="fa-solid fa-circle-info"></i></button> -->
+                           </td>
+                        </tr>
+                     }@empty{
+                        <tr>
+                           <td colspan="3">User not found!</td>
+                        </tr>
+                     }
+                   </tbody> 
+                </table>
+
+                <span class="pagination_controls text-end mt-4 d-block">
+                   <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </span>
+               </div>
+          </div>
+       </div>
+    </div>
+ </main>
+ 

@@ -32,7 +32,7 @@ export class UserDetailsComponent implements OnInit{
   userDetails(){
     this.restApi.userDetailsApi(this.userId).subscribe((res:any)=>{
       if(res.status){
-        this.profile_data = res.user_details;
+        this.profile_data = res.data;
       }else{
         this.noty.error(res.message);
       }
