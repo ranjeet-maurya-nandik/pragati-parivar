@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RestApiService } from '../../../services/api/rest-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { NotifyService } from '../../../services/noty/notify.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-give-ask-details',
   standalone: true,
-  imports: [],
+  imports: [CommonModule ],
   templateUrl: './give-ask-details.component.html',
   styleUrl: './give-ask-details.component.scss'
 })

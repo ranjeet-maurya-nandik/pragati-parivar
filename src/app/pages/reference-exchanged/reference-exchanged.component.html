@@ -27,7 +27,7 @@
                <table class="table table table-hover cloverleaf_table">
                   <thead>
                      <tr>
-                        <th scope="col">S.No</th>
+                        <th scope="col" style="width: 60px;">S.No</th>
                         <th scope="col">Reference Given by</th>
                         <th scope="col">Reference Received by</th>
                         <th scope="col">Reference Date</th>
@@ -39,20 +39,16 @@
                      @for(item of list.references | paginate:{itemsPerPage:10,currentPage:p}; track item; let i =
                      $index){
                      <tr>
-                        <td>{{i+1}}</td>
+                        <td>{{ i + 1 + (p - 1) * 10 }}</td>
                         <td>{{item.reference_given_by}}</td>
                         <td>{{item.reference_received_by}}</td>
                         <td>{{item.ref_date }}</td>
                         <td>
-                           <button routerLink="/reference-excahanged-details" [queryParams]="{ id: item.id }"
+                           <button routerLink="/reference-exchanged-details" [queryParams]="{ id: item.id }"
                               class="btn btn-default">
-                              <i class="fa-solid fa-circle-info"></i>
+                              <i class="fa-solid fa-eye"></i>
                            </button>
                         </td>
-                     </tr>
-                     }@empty{
-                     <tr>
-                        <td colspan="6">User not found!</td>
                      </tr>
                      }
                   </tbody>

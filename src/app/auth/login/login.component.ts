@@ -56,11 +56,14 @@ export class LoginComponent {
       this.apiResponse = true;
       this.restApi.login(formData).subscribe((response: any) => {
         if (response.status) {
+          console.log(response.data.role)
+          if(response.data.role == 1){
             this.storage.set('token',response.token);
             this.storage.set('user_details',JSON.stringify(response.data));
             this.router.navigate(['/']);
             this.noty.success(response.message);
             this.apiResponse = false;
+          }
         }else{
           this.apiResponse = false;
           this.noty.error(response.message);

@@ -75,9 +75,10 @@
                                     <input class="form-control" type="password" formControlName="password"
                                         placeholder="Enter passowrd" />
                                     <p class="error_msg">
-                                        @if(userAddForm.get('password').errors?.['minlength']
-                                        && userAddForm.get('password').touched){
-                                        <span class="red-error">Password must be at least 8 characters long</span>
+                                        @if(userAddForm.get('password').invalid && userAddForm.get('password').touched){
+                                            @if(userAddForm.get('password').hasError('passwordInvalid')){
+                                                <span class="red-error">Password must include uppercase, lowercase, a number or symbol, and be at least 6 characters. E.g., Demo&#64;1</span>
+                                            }
                                         }
                                     </p>
                                 </div>
@@ -148,13 +149,13 @@
                                     <label>Office map url</label>
                                     <input class="form-control" type="text" formControlName="officeMap"
                                         placeholder="Enter map url" />
-                                    @if(userAddForm.get('officeMap').invalid && userAddForm.get('officeMap').touched){
+                                    <!-- @if(userAddForm.get('officeMap').invalid && userAddForm.get('officeMap').touched){
                                     <p class="error_msg">
                                         @if(userAddForm.get('officeMap').errors?.['invalidUrl']){
                                         <span class="red-error">Invalid Map URL</span>
                                         }
                                     </p>
-                                    }
+                                    } -->
                                 </div>
 
                                 <div class="form-group form_group">

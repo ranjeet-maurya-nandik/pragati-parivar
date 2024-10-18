@@ -27,7 +27,7 @@
                 <table class="table table table-hover cloverleaf_table">
                    <thead>
                       <tr>
-                         <th scope="col">S.No</th>
+                         <th style="width: 60px;" scope="col">S.No</th>
                          <th scope="col">Wing Name</th>
                          <th scope="col">Action</th>
                       </tr>
@@ -36,17 +36,17 @@
 
                      @for(wing of wingLists | paginate : { itemsPerPage: 10, currentPage: p }; track wing; let i = $index){
                         <tr>
-                           <td>{{i+1}}</td>
+                           <td>{{ i + 1 + (p - 1) * 10 }}</td>
                            <td>{{wing.wing_name}}</td>
                            <td>
                               <button routerLink="/add-wing"  [queryParams]="{ id: wing.id }" class="btn btn-default"><i class="fa-solid fa-pen-to-square text-primary pointer"></i></button>
                               <button (click)="deleteWing(wing.id)" class="btn btn-default"> <i class="fa-solid fa-trash text-danger"></i></button>
-                              <!-- <button routerLink="/user-details"  [queryParams]="{ id: user.id }" class="btn btn-default"><i class="fa-solid fa-circle-info"></i></button> -->
+                              <!-- <button routerLink="/user-details"  [queryParams]="{ id: user.id }" class="btn btn-default"><i class="fa-solid fa-eye"></i></button> -->
                            </td>
                         </tr>
                      }@empty{
                         <tr>
-                           <td colspan="3">User not found!</td>
+                           <td colspan="3">Wing not found!</td>
                         </tr>
                      }
                    </tbody> 

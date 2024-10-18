@@ -27,7 +27,7 @@
                 <table class="table table table-hover cloverleaf_table">
                    <thead>
                       <tr>
-                         <th scope="col">S.No</th>
+                         <th scope="col" style="width: 60px;">S.No</th>
                          <th scope="col">Wing Name</th>
                          <th scope="col">Meeting Date</th>
                          <th scope="col">Meeting Time</th>
@@ -38,19 +38,19 @@
 
                      @for(meet of meetingLists | paginate : { itemsPerPage: 10, currentPage: p }; track meet; let i = $index){
                         <tr>
-                           <td>{{i+1}}</td>
+                           <td>{{ i + 1 + (p - 1) * 10 }}</td>
                            <td>{{meet.wing_name}}</td>
                            <td>{{meet.meeting_date}}</td>
                            <td>{{meet.meeting_time}}</td>
                            <td>
                               <button routerLink="/add-meeting"  [queryParams]="{ id: meet.id }" class="btn btn-default"><i class="fa-solid fa-pen-to-square text-primary pointer"></i></button>
                               <button (click)="deleteMeeting(meet.id)" class="btn btn-default"> <i class="fa-solid fa-trash text-danger"></i></button>
-                              <!-- <button routerLink="/user-details"  [queryParams]="{ id: user.id }" class="btn btn-default"><i class="fa-solid fa-circle-info"></i></button> -->
+                              <!-- <button routerLink="/user-details"  [queryParams]="{ id: user.id }" class="btn btn-default"><i class="fa-solid fa-eye"></i></button> -->
                            </td>
                         </tr>
                      }@empty{
                         <tr>
-                           <td colspan="3">User not found!</td>
+                           <td colspan="5">Upcoming meeting not found!</td>
                         </tr>
                      }
                    </tbody> 

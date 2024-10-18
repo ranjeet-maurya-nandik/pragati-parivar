@@ -1,89 +1,177 @@
-<main class="dashboard_wrapper_content rounded">
+<main class="dashboard_wrapper_content rounded ">
     <div class="container-fuild">
         <div class="row">
             <div class="col-md-12">
                 <div class="table-header-bar pt-4 px-3">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="table-title d-flex align-items-center">
-                                <h4 class="m-0 ">Welcome to Dashboard</h4>
+                        <div class="col-md-12">
+                            <div class="table-title d-flex align-items-center justify-content-between">
+                                <h4 class="m-0 ">Dashboard</h4>
+                                @if(updateFilter){
+                                    <button (click)="Filter(5,1)" class="btn btn-danger">Clear Filter</button>
+                                }
                             </div>
                         </div>
                     </div>
                     <div class="row align-items-stretch mt-5">
-                        <div class="c-dashboardInfo col-lg-3 col-md-6">
+                        <div class="pointer c-dashboardInfo col-lg-3 col-md-6" routerLink="/wing-management">
                             <div class="wrap">
                                 <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
-                                    Total Wings </h4><span
+                                    <span class="icon"><img src="./icon/icon2.png" alt=""></span>
+                                    <span>Total Wings</span>
+                                </h4><span
                                     class="hind-font caption-12 c-dashboardInfo__count">{{dashboard_data.wings_count}}
                                 </span>
                             </div>
                         </div>
-                        <div class="c-dashboardInfo col-lg-3 col-md-6">
+                        <div class="pointer c-dashboardInfo col-lg-3 col-md-6" routerLink="/user-management">
                             <div class="wrap">
-                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Total
-                                    Users
+                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                    <span class="icon"><img src="./icon/icon2.png" alt=""></span>
+                                    <span>Total Users</span>
                                 </h4><span
                                     class="hind-font caption-12 c-dashboardInfo__count">{{dashboard_data.users_count}}</span>
                             </div>
                         </div>
-                        <div class="c-dashboardInfo col-lg-3 col-md-6">
+                        <div class="pointer c-dashboardInfo col-lg-3 col-md-6" routerLink="/r2b">
                             <div class="wrap">
-                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Total
-                                    R2B </h4><span
+                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                    <span class="icon"><img src="./icon/icon2.png" alt=""></span>
+                                    <span>Total R2B</span>
+                                </h4><span
                                     class="hind-font caption-12 c-dashboardInfo__count">{{dashboard_data.r2b_count}}</span>
                             </div>
                         </div>
-                        <div class="c-dashboardInfo col-lg-3 col-md-6">
+                        <div class="pointer c-dashboardInfo col-lg-3 col-md-6" routerLink="/reference-exchanged">
                             <div class="wrap">
                                 <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
-                                    Total Refernce Exchange
+                                    <span class="icon"><img src="./icon/icon4.png" alt=""></span>
+                                    <span>Total Reference Excahnge</span>
                                 </h4><span
                                     class="hind-font caption-12 c-dashboardInfo__count">{{dashboard_data.refernce_exchange_count}}</span>
                             </div>
                         </div>
                     </div>
-
+                    @if(response){
                     <div class="row mt-5">
-                        <div class="col-lg-7">
-                            <h5 class="m-0 "><strong>Upcoming Meetings</strong></h5>
-                            <div class="work-oder-table-body work_order_table">
-                                <table class="table table table-hover cloverleaf_table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" style="width: 60px;">S.No</th>
-                                            <th scope="col">Wing Name</th>
-                                            <th scope="col">Time</th>
-                                            <th scope="col">Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                        <div class="col-lg-6">
+                            <div class="col-area mb-4">
+                                <h5 class="m-0 "><strong>Business Reporting</strong>
+                                    <div class="dropdown">
+                                        <button class="btn btn-default" type="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <img src="./icon/filter.png" alt="filter icon">
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu">
+                                            <li (click)="Filter(1,1)"><a class="dropdown-item"
+                                                    href="javascript:void(0)">All</a></li>
+                                            <li (click)="Filter(1,2)"><a class="dropdown-item"
+                                                    href="javascript:void(0)">1 Year Months</a></li>
+                                            <li (click)="Filter(1,3)"><a class="dropdown-item"
+                                                    href="javascript:void(0)">6 Months</a></li>
+                                            <li (click)="Filter(1,4)"><a class="dropdown-item"
+                                                    href="javascript:void(0)">2 Months</a></li>
 
-                                        @for(user of dashboard_data .upcoming_meetings| paginate : { itemsPerPage: 10,
-                                        currentPage: p }; track user; let i = $index){
-                                        <tr>
-                                            <td>{{i+1}}</td>
-                                            <td>{{user.wing_name}}</td>
-                                            <td>{{user.meeting_time}}</td>
-                                            <td>{{user.meeting_date}}</td>
-                                        </tr>
-                                        }@empty{
-                                        <tr>
-                                            <td colspan="6">Date not found!</td>
-                                        </tr>
+                                        </ul>
+                                    </div>
+                                </h5>
+                                <div class="business_reporting">
+                                    <owl-carousel-o [options]="customOptions">
+                                        @for(item of businessData; track item){
+                                        <ng-template carouselSlide>
+                                            <div class="card">
+                                                <div class="text-end mb-2">
+                                                    <span class="months">{{item.month | slice : 0: 3}}</span>
+                                                </div>
+                                                <span class="business">{{item.count}}</span>
+                                            </div>
+                                        </ng-template>
                                         }
-                                    </tbody>
-                                </table>
+                                    </owl-carousel-o>
 
-                                <span class="pagination_controls text-end mt-4 d-block">
-                                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                                </span>
+                                </div>
+                            </div>
+                            <div class="col-area">
+                                <h5 class="m-0 ">
+                                    <strong>Upcoming Meetings</strong>
+                                    <div class="dropdown">
+                                        <button class="btn btn-default" type="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <img src="./icon/filter.png" alt="filter icon">
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu">
+                                            <li (click)="Filter(4,1)"><a class="dropdown-item"
+                                                    href="javascript:void(0)">All</a></li>
+                                            @for(wing of wingLists; track wing){
+                                            <li (click)="Filter(4,wing.id)"><a class="dropdown-item"
+                                                    href="javascript:void(0)">{{wing.wing_name}}</a></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </h5>
+                                <div class="meeting-oder">
+                                    <ul>
+                                        @for(meet of dashboard_data.upcoming_meetings |
+                                        paginate:{itemsPerPage:7,currentPage:p}; track meet){
+                                        <li class="list-item">
+                                            <span
+                                                [ngClass]="{uday:meet.wing_name == 'Uday',unnati:meet.wing_name == 'Unnati',uttan:meet.wing_name == 'Uttan'}">{{meet.wing_name}}</span>
+                                            <span>{{meet.meeting_time}}</span>
+                                            <span>{{meet.meeting_date}}</span>
+                                        </li>
+                                        }
+                                    </ul>
+                                    <span class="pagination_controls text-end mt-4 d-block">
+                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-area mb-4">
+                                <div class="dropdown filter_drop">
+                                    <button class="btn btn-default" type="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <img src="./icon/filter.png" alt="filter icon">
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu">
+                                        <li (click)="Filter(2,1)"><a class="dropdown-item"
+                                                href="javascript:void(0)">All</a></li>
+                                        <li (click)="Filter(2,2)"><a class="dropdown-item"
+                                                href="javascript:void(0)">1 Year Months</a></li>
+                                        <li (click)="Filter(2,3)"><a class="dropdown-item"
+                                                href="javascript:void(0)">6 Months</a></li>
+                                        <li (click)="Filter(2,4)"><a class="dropdown-item"
+                                                href="javascript:void(0)">2 Months</a></li>
+
+                                    </ul>
+                                </div>
+                                <div [chart]="reference_exchanged"></div>
+                            </div>
+                            <div class="col-area mb-4">
+                                <div class="dropdown filter_drop">
+                                    <button class="btn btn-default" type="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <img src="./icon/filter.png" alt="filter icon">
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu">
+                                        <li (click)="Filter(3,1)"><a class="dropdown-item"
+                                                href="javascript:void(0)">All</a></li>
+                                        <li (click)="Filter(3,2)"><a class="dropdown-item"
+                                                href="javascript:void(0)">1 Year Months</a></li>
+                                        <li (click)="Filter(3,3)"><a class="dropdown-item"
+                                                href="javascript:void(0)">6 Months</a></li>
+                                        <li (click)="Filter(3,4)"><a class="dropdown-item"
+                                                href="javascript:void(0)">2 Months</a></li>
+
+                                    </ul>
+                                </div>
+                                <div [chart]="r2b"></div>
                             </div>
                         </div>
-                        <div class="col-lg-5">
-
-                        </div>
                     </div>
+                    }
                 </div>
             </div>
         </div>

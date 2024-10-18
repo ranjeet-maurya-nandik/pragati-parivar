@@ -1,1 +1,54 @@
-<p>reports works!</p>
+<main class="dashboard_wrapper_content rounded  report_cards">
+    <div class="container-fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-header-bar pt-4 px-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="table-title d-flex align-items-center">
+                                <h4 class="m-0 ">Dashboard</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-stretch mt-5">
+                        <div class="pointer c-dashboardInfo col-lg-4 col-md-6" [routerLink]="['/r2b-report']">
+                            <div class="wrap">
+                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                    <div class="heading_arrow">
+                                        <span class="icon"><img src="./icon/icon8_black.png" alt=""></span>
+                                        <span>R2B Intercation Breakdown</span>
+                                    </div>
+                                    <span class="icon"><img src="./icon/arrow.png" alt=""></span>
+                                </h4><span class="hind-font caption-12 c-dashboardInfo__count">{{counts.all_r2b}} </span>
+                            </div>
+                        </div>
+                        <div class="pointer c-dashboardInfo col-lg-4 col-md-6" [routerLink]="['/reference-report']">
+                            <div class="wrap">
+                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                    <div class="heading_arrow">
+                                        <span class="icon"><img src="./icon/icon5_black.png" alt=""></span>
+                                        <span>Reference Exchange Overview</span>
+                                    </div>
+                                    <span class="icon"><img src="./icon/arrow.png" alt=""></span>
+                                </h4>
+                                <span class="hind-font caption-12 c-dashboardInfo__count">{{counts.all_reference_exchange}} </span>
+                            </div>
+                        </div>
+                        <div class="pointer c-dashboardInfo col-lg-4 col-md-6" [routerLink]="['/business-report']">
+                            <div class="wrap">
+                                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                    <div class="heading_arrow">
+                                        <span class="icon"><img src="./icon/icon7_black.png" alt=""></span>
+                                        <span>Business Reporting Analysis</span>
+                                    </div>
+                                    <span class="icon"><img src="./icon/arrow.png" alt=""></span>
+                                </h4><span class="hind-font caption-12 c-dashboardInfo__count">{{counts.all_bs_reporting}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

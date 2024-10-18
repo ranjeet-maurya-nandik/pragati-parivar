@@ -29,23 +29,27 @@ interface R2B {
 export class R2bComponent implements OnInit {
   constructor(private restApi: RestApiService, private noty: NotifyService) { }
   p: number = 1;
+  
+   currentDate = new Date();   
   ngOnInit(): void {
+    const yesterdayDate = new Date(this.currentDate);
+    yesterdayDate.setDate(this.currentDate.getDate() - 1);
+    this.today = yesterdayDate.toISOString().split('T');
+    
     this.r2bList('');
   }
   r2bLists:R2B[] = [];
   today:any = '';
   r2bList(date:any) {
     const selectedDate = new Date(date.value);
-    const currentDate = new Date();   
-    this.today = currentDate.toISOString().split('T');
 
-    if (selectedDate > currentDate) {
+    if (selectedDate > this.currentDate) {
       this.noty.error('Future dates are not allowed.');
       return;
     }
 
     const data = {
-      date:date.value ?? ''
+      date:date.value ?? this.today[0]
     }
     
     this.restApi.r2bApi(data).subscribe((res: any) => {

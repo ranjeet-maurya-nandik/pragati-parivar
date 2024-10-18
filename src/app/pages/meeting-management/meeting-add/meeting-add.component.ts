@@ -43,6 +43,9 @@ export class MeetingAddComponent {
       meet_time: new FormControl('', [Validators.required]),
       meet_date: new FormControl('', [Validators.required]),
     });
+    this.meetingAddForm.patchValue({
+      meet_time: '07:29'
+    });
 
   }
 

@@ -23,32 +23,36 @@ interface BusinessReport {
 @Component({
   selector: 'app-business-reporting',
   standalone: true,
-  imports: [RouterLink,NgxPaginationModule],
+  imports: [RouterLink, NgxPaginationModule],
   templateUrl: './business-reporting.component.html',
   styleUrl: './business-reporting.component.scss'
 })
 export class BusinessReportingComponent implements OnInit {
-  p:number = 0;
+  p: number = 0;
+  currentDate = new Date();
+
   constructor(private restApi: RestApiService, private noty: NotifyService) { }
   ngOnInit(): void {
+    const yesterdayDate = new Date(this.currentDate);
+    yesterdayDate.setDate(this.currentDate.getDate() - 1);
+    this.today = yesterdayDate.toISOString().split('T');
+    
+
     this.BusinessReportList('');
   }
   businessReportLists: BusinessReport[] = [];
-  today:any;
-  BusinessReportList(date:any) {
+  today: any;
+  BusinessReportList(date: any) {
 
     const selectedDate = new Date(date.value);
-    const currentDate = new Date();
-  
-    this.today = currentDate.toISOString().split('T');
 
-    if (selectedDate > currentDate) {
+    if (selectedDate > this.currentDate) {
       this.noty.error('Future dates are not allowed.');
       return;
     }
 
     const data = {
-      date: date.value ?? ''
+      date: date.value ?? this.today[0]
     }
 
     this.restApi.businessReportingApi(data).subscribe((res: any) => {

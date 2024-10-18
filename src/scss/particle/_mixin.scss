@@ -28,3 +28,9 @@
         @content;
     }
 }
+
+@mixin _flex($flex,$jsutify,$align){
+    display: $flex;
+    justify-content: $jsutify;
+    align-items: $align;
+}

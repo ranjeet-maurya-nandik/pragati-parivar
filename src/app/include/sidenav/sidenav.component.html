@@ -7,14 +7,50 @@
   </div>
 
   <ul class="unoder-list">
-    <li><a  routerLink="/dashboard" routerLinkActive="active" href="javascript:void(0)"> <i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-    <li><a  routerLink="/wing-management" routerLinkActive="active" [ngClass]="{active:routes == '/add-wing' || routes == '/wing-management'}"  href="javascript:void(0)" > <i class="fa fa-dashboard"></i> <span>Wing Management</span></a></li>
-    <li><a  routerLink="/user-management" routerLinkActive="active" [ngClass]="{active:routes == '/add-user' || routes == '/user-details' || routes == '/user-management'}" href="javascript:void(0)" > <i class="fa fa-user"></i> <span>User Management</span></a></li>
-    <li><a  routerLink="/meeting-management" routerLinkActive="active" [ngClass]="{active:routes == '/add-meeting' || routes == '/meeting-management'}"  href="javascript:void(0)" > <i class="fa fa-dashboard"></i> <span>Meeting Management</span></a></li>
-    <li><a routerLink="/reference-excahanged" routerLinkActive="active" href="javascript:void(0)" > <i class="fa-solid fa-right-left"></i> <span>Reference Excahanged</span></a></li>
-    <li><a routerLink="/give-ask" routerLinkActive="active" href="javascript:void(0)" > <i class="fa-solid fa-comment"></i> <span>Give & Ask</span></a></li>
-    <li><a routerLink="/business-reporting" routerLinkActive="active" href="javascript:void(0)" > <i class="fa-solid fa-business-time"></i> <span>Business Reporting</span></a></li>
-    <li><a routerLink="/r2b" routerLinkActive="active" href="javascript:void(0)" > <i class="fa fa-user"></i> <span>R2B</span></a></li>
-    <li><a routerLink="/reports" routerLinkActive="active" href="javascript:void(0)" > <i class="fa fa-user"></i> <span>Reports</span></a></li>
+    <li>
+      <a  routerLink="/dashboard" routerLinkActive="active" href="javascript:void(0)"> 
+        <span><img src="./icon/icon1.png" alt="icon"></span> <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a  routerLink="/wing-management"  [ngClass]="{active:routes == '/add-wing' || routes == '/wing-management'}"  href="javascript:void(0)" >
+        <span><img src="./icon/icon2.png" alt="icon"></span> <span>Wing Management</span>
+      </a>
+    </li>
+    <li>
+      <a  routerLink="/user-management"  [ngClass]="{active:routes == '/add-user' || routes == '/user-details' || routes == '/user-management'}" href="javascript:void(0)">
+        <span><img src="./icon/icon3.png" alt="icon"></span><span>User Management</span>
+      </a>
+    </li>
+    <li>
+      <a  routerLink="/meeting-management" [ngClass]="{active:routes == '/meeting-management' ||routes == '/add-meeting'}"  href="javascript:void(0)" >
+        <span><img src="./icon/icon4.png" alt="icon"></span> <span>Meeting Management</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/reference-exchanged" [ngClass]="{active:routes == '/reference-exchanged' ||routes == '/reference-exchanged-details'}" href="javascript:void(0)" > 
+        <span><img src="./icon/icon5.png" alt="icon"></span> <span>Reference Exchanged</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/give-ask" [ngClass]="{active:routes == '/give-ask' ||routes == '/give-ask-details'}" href="javascript:void(0)">
+        <span><img src="./icon/icon6.png" alt="icon"></span> <span>Give & Ask</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/business-reporting" [ngClass]="{active:routes == '/business-reporting' ||routes == '/business-reporting-details'}" href="javascript:void(0)">
+        <span><img src="./icon/icon7.png" alt="icon"></span> <span>Business Reporting</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/r2b" [ngClass]="{active:routes == '/r2b' ||routes == '/r2b-details'}" href="javascript:void(0)"> 
+        <span><img src="./icon/icon8.png" alt="icon"></span> <span>R2B</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/reports"   [ngClass]="{active: routes == '/reports' ||  routes == '/r2b-report-summery' || routes == '/r2b-report' || routes == '/business-report-summery' ||routes == '/business-report' || routes == '/reference-report-summery' ||routes == '/reference-report'}" href="javascript:void(0)">
+        <span><img src="./icon/icon9.png" alt="icon"></span> <span>Reports</span>
+      </a>
+    </li>
   </ul>
 </nav>

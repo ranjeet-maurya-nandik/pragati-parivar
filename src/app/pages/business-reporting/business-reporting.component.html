@@ -26,7 +26,7 @@
                <table class="table table table-hover cloverleaf_table">
                   <thead>
                      <tr>
-                        <th scope="col">S.No</th>
+                        <th scope="col" style="width: 60px;">S.No</th>
                         <!-- <th scope="col">Giver Name</th> -->
                         <th scope="col">Receiver Name</th>
                         <th scope="col">Transaction Name</th>
@@ -39,7 +39,7 @@
 
                      @for(busi of list.reports | paginate:{itemsPerPage:10,currentPage:p}; track busi; let i = $index){
                      <tr>
-                        <td>{{i+1}}</td>
+                        <td>{{ i + 1 + (p - 1) * 10 }}</td>
                         <!-- <td>{{busi.giver_name}}</td> -->
                         <td>{{busi.receiver_name}}</td>
                         <td>{{busi.type_of_transaction_name}}</td>
@@ -47,13 +47,9 @@
                         <td>{{busi.amount}}</td>
                         <td>
                            <button routerLink="/business-reporting-details" [queryParams]="{ id: busi.id }" class="btn btn-default">
-                              <i class="fa-solid fa-circle-info"></i>
+                              <i class="fa-solid fa-eye"></i>
                            </button>
                         </td>
-                     </tr>
-                     }@empty{
-                     <tr>
-                        <td colspan="6">Data not found!</td>
                      </tr>
                      }
                   </tbody>

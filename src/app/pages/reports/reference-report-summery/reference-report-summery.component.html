@@ -1,0 +1,58 @@
+<main class="dashboard_wrapper_content">
+    <div class="container-fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-header-bar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="table-title d-flex align-items-center">
+                                <h5 class="m-0">
+                                     <span routerLink="/reference-report" class="pointer pe-2"><img  src="./icon/back-btn.png" alt="Reference Exchange"> </span>
+                                    <span>Reference Exchange Report Summery</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-md-5 offset-md-1"></div>
+                    </div>
+                </div>
+                <div class="work-oder-table-body work_order_table mb-4">
+                    <table class="table table table-hover cloverleaf_table">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 60px;">S.No</th>
+                                <th scope="col">Given by</th>
+                                <th scope="col">Recieved by</th>
+                                <th scope="col">Reference date</th>
+                                <th scope="col">For what</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @for(list of lists| paginate:{itemsPerPage:10,currentPage:p}; track list; let i = $index){
+                            <tr>
+                                <td>{{ i + 1 + (p - 1) * 10 }}</td>
+                                <td>{{list.given_by}}</td>
+                                <td>{{list.recieved_by}}</td>
+                                <td>{{list.ref_date}}</td>
+                                <td>{{list.for_what}}</td>                     
+                            </tr>
+                            }@empty{
+                                <tr>
+                                    <td colspan="5">
+                                        <p class="text-center">Data not found!</p>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <span class="pagination_controls text-end mt-4 d-block">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- new modal started for :: link document   -->
+</main>

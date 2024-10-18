@@ -26,7 +26,7 @@
                <table class="table table table-hover cloverleaf_table">
                   <thead>
                      <tr>
-                        <th scope="col">S.No</th>
+                        <th scope="col" style="width: 60px;">S.No</th>
                         <th scope="col">Guest Name</th>
                         <th scope="col">Host Name</th>
                         <th scope="col">Date R2B</th>
@@ -38,19 +38,15 @@
 
                      @for(rb of list.sublist| paginate:{itemsPerPage:10,currentPage:p}; track rb; let i = $index){
                      <tr>
-                        <td>{{i+1}}</td>
+                        <td>{{ i + 1 + (p - 1) * 10 }}</td>
                         <td>{{rb.guest_name}}</td>
                         <td>{{rb.host_name}}</td>
                         <td>{{rb.date_of_r2b}}</td>
                         <td>
                            <button routerLink="/r2b-details" [queryParams]="{ id: rb.id }" class="btn btn-default">
-                              <i class="fa-solid fa-circle-info"></i>
+                              <i class="fa-solid fa-eye"></i>
                            </button>
                         </td>
-                     </tr>
-                     }@empty{
-                     <tr>
-                        <td colspan="4">Data not found!</td>
                      </tr>
                      }
                   </tbody>

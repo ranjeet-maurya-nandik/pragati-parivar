@@ -19,6 +19,7 @@ export class SidenavComponent implements OnInit{
       let urlWithoutParams = this.route.url.split('?')[0];
       urlWithoutParams = urlWithoutParams.split(';')[0];
       this.routes = urlWithoutParams;
+      console.log(this.routes);
     })    
   }
 }

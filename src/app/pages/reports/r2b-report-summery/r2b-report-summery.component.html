@@ -1,0 +1,63 @@
+<main class="dashboard_wrapper_content">
+    <div class="container-fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-header-bar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="table-title d-flex align-items-center">
+
+                                <h5 class="m-0">
+                                    <span routerLink="/r2b-report" class="pointer pe-2"><img  src="./icon/back-btn.png" alt="Reference Exchange"> </span>
+                                    <span>R2B Report Summery</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-md-5 offset-md-1"></div>
+                    </div>
+                </div>
+                <div class="work-oder-table-body work_order_table mb-4">
+                    <table class="table table table-hover cloverleaf_table">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 60px;">S.No</th>
+                                <th scope="col">Host</th>
+                                <th scope="col">Guest</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Business Purpose</th>
+                                <th scope="col">Gaincd Followed</th>
+                                <th scope="col">Discussion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @for(list of lists| paginate:{itemsPerPage:10,currentPage:p}; track list; let i = $index){
+                            <tr>
+                                <td>{{ i + 1 + (p - 1) * 10 }}</td>
+                                <td>{{list.r2b_host}}</td>
+                                <td>{{list.r2b_guest}}</td>
+                                <td>{{list.r2b_date}}</td>
+                                <td>{{list.business_purpose}}</td>                     
+                                <td>{{list.gaincd_followed}}</td>                     
+                                <td>{{list.discussion}}</td>                     
+                            </tr>
+                            }@empty{
+                                <tr>
+                                    <td colspan="7">
+                                        <p class="text-center">Data not found!</p>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <span class="pagination_controls text-end mt-4 d-block">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- new modal started for :: link document   -->
+</main>

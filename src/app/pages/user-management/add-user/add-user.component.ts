@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestApiService } from '../../../services/api/rest-api.service';
 import { NotifyService } from '../../../services/noty/notify.service';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({
@@ -44,7 +44,7 @@ export class AddUserComponent {
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.minLength(5), Validators.email]),
       phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
-      password: new FormControl('', [Validators.minLength(8)]),
+      password: new FormControl('', [this.passwordValidator()]),
       user_photo: new FormControl('', []),
 
       company_name: new FormControl('', [Validators.required]),
@@ -52,7 +52,7 @@ export class AddUserComponent {
       company_website: new FormControl('', []),
       category: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
-      officeMap: new FormControl('', [this.urlValidator]),
+      officeMap: new FormControl('', []),
       city: new FormControl('', [Validators.required]),
       state: new FormControl('', [Validators.required]),
       postal_code: new FormControl('', [Validators.required,Validators.pattern('^[0-9]*$')]),
@@ -60,13 +60,27 @@ export class AddUserComponent {
     });
 
   } 
- urlValidator(control: any) {
-    const urlPattern = /^(https?:\/\/)?(www\.)?(google\.(com|co\.[a-z]{2,3})\/maps|openstreetmap\.org\/)(.+)$/;
-    if (!control.value.match(urlPattern)) {
-      return { invalidUrl: true };
-    }
-    return null;
+
+  passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const password = control.value;
+  
+      if (!password) {
+        return null; 
+      }
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).{6,}$/;
+      const isValid = passwordPattern.test(password);
+      return isValid ? null : { passwordInvalid: true };
+    };
   }
+
+//  urlValidator(control: any) {
+//     const urlPattern = /^(https?:\/\/)?(www\.)?(google\.(com|co\.[a-z]{2,3})\/maps|openstreetmap\.org\/)(.+)$/;
+//     if (!control.value.match(urlPattern)) {
+//       return { invalidUrl: true };
+//     }
+//     return null;
+//   }
 
   apiResponse: boolean = false;
 
